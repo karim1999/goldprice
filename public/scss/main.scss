@@ -1,0 +1,760 @@
+$white: #FFFFFF;
+$dark-white: #F5F5F6;
+$darker-white: #E6E6EB;
+$danger: #FF7979;
+$warning: #F0AA35;
+$success: #45B854;
+$primary: #3498DB;
+$light-grey: #98A3B7;
+$dark-grey: #5E6C84;
+$darker-grey: #344563;
+$dark-blue: #0F78BF;
+$light-blue: #87BBDF;
+$grey: #F5F5F6;
+$darkGrey: #dadada;
+$blue: #3498DB;
+
+@-webkit-keyframes spinner {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.loaderScreen{
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loader{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid $darkGrey;
+    border-left-color: $blue;
+    -webkit-animation: spinner 1s linear infinite;
+    -moz-animation: spinner 1s linear infinite;
+    animation: spinner 1s linear infinite;
+  }
+}
+
+body{
+  background-color: $dark-white;
+  color: $darker-grey;
+}
+p, h1, h2, h3, h4, h5, h6{
+  margin: 0;
+}
+a, a:hover, a:focus, a:visited, a:active{
+  font-weight: bolder;
+  color: $darker-grey;
+  text-decoration: none;
+}
+header{
+  position: relative;
+  z-index: 50;
+  background-color: $white;
+  padding: 15px 30px;
+  -webkit-box-shadow: 0px -10px 40px 5px #ccc;
+  -moz-box-shadow:    0px -10px 40px 5px #ccc;
+  box-shadow:         0px -10px 40px 5px #ccc;
+
+  .logo{
+    .navBtn{
+      cursor: pointer;
+    }
+    svg{
+      margin-left: 10px;
+    }
+    h4 {
+      font-family: DIN-NEXT-HEAVY, sans-serif;
+      font-size: 20px;
+      @media screen and (max-width: 576px) {
+        display: none;
+      }
+    }
+  }
+  .logout{
+    margin: 0 0 0 20px;
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-size: 16px;
+    @media screen and (max-width: 576px){
+      margin: 0 0 0 10px;
+    }
+  }
+}
+.wrapper{
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  overflow-x: hidden;
+  nav{
+    z-index: 49;
+    background-color: $white;
+    padding: 30px 15px 0 15px;
+    width: 280px;
+    transition: 0.5s;
+    -webkit-box-shadow: 10px -15px 20px 5px #ccc;
+    -moz-box-shadow:    10px -15px 20px 5px #ccc;
+    box-shadow:         10px -15px 20px 5px #ccc;
+    &.hide{
+      margin-right: -280px;
+    }
+    .nav-list{
+      margin: 0;
+      li{
+        .liContainer{
+          border-radius: 5px;
+          color: $dark-grey;
+          &:not(.last){
+            margin-bottom: 20px;
+            padding: 5px 15px;
+          }
+          &.active, &:hover{
+            background-color: $dark-white;
+            cursor: pointer;
+            color: $primary;
+            svg{
+              fill: $primary;
+            }
+          }
+          svg{
+            fill: $darker-grey;
+          }
+          p{
+            margin: 0 10px;
+            font-family: DIN-NEXT-LIGHT, sans-serif;
+            font-weight: bolder;
+            font-size: 16px;
+          }
+        }
+        .last{
+          padding: 5px 15px 5px 15px;
+        }
+        .sub-tree{
+          margin: 0 0 20px 0;
+          li{
+            font-family: DIN-NEXT-ULTRALIGHT, sans-serif;
+            font-weight: 700;
+            color: $dark-grey;
+            margin-bottom: 10px;
+            padding: 5px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            display: flex;
+            &.active, &:hover{
+              background-color: $dark-white;
+              cursor: pointer;
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+  section{
+    padding: 30px 45px 0 50px;
+    width: 100%;
+    @media screen and (max-width: 768px){
+      padding: 30px 25px 0 25px;
+    }
+    &.hide{
+      margin-left: -280px;
+    }
+    .content-title{
+      margin-bottom: 30px;
+      font-family: DIN-NEXT-BOLD, sans-serif;
+      font-size: 22px;
+    }
+    .buttons{
+      margin-bottom: 20px;
+    }
+    button{
+      font-family: DIN-NEXT-MEDIUM, sans-serif;
+      font-size: 16px;
+      padding: 10px 0;
+    }
+    .edit-btn{
+      width: 152px;
+    }
+    .apply-btn{
+      border: 1px solid $darker-white;
+      padding: 10px;
+      color: $dark-grey;
+      -webkit-box-shadow: 0px 0px 25px -10px #cacaca;
+      -moz-box-shadow:    0px 0px 25px -10px #cacaca;
+      box-shadow:         0px 0px 25px -10px #cacaca;
+      img{
+        margin-left: 10px;
+      }
+    }
+  }
+}
+.homeCart{
+  @media screen and (max-width: 768px){
+    margin-bottom: 20px;
+  }
+}
+.flat-card{
+  background-color: $white;
+  border-radius: 7px;
+  padding: 20px 25px;
+  -webkit-box-shadow: 0px 0px 25px -10px #cacaca;
+  -moz-box-shadow:    0px 0px 25px -10px #cacaca;
+  box-shadow:         0px 0px 25px -10px #cacaca;
+  &:not(:last-of-type){
+    margin-left: 15px;
+  }
+  @media screen and (max-width: 768px){
+    &:not(:last-of-type){
+      margin-left: 0px;
+    }
+  }
+  .flat-card-title{
+    font-family: DIN-NEXT-LIGHT, sans-serif;
+    font-weight: bolder;
+    font-size: 18px;
+    color: $dark-grey;
+    margin-bottom: 20px;
+  }
+  h3{
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-size: 26px;
+  }
+  .title{
+    .indicator{
+      width: 18px;
+      height: 18px;
+      margin-left: 15px;
+      border-radius: 4px;
+    }
+    p{
+      font-family: DIN-NEXT-BOLD, sans-serif;
+      font-size: 16px;
+    }
+    .dark-blue{
+      background-color: $dark-blue;
+    }
+    .light-blue{
+      background-color: $light-blue;
+    }
+  }
+  .value{
+    color: $dark-grey;
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-size: 16px;
+  }
+}
+.titles, .content{
+  margin: 0 0 20px 0;
+
+  .head-titles{
+    padding: 20px 25px;
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-weight: lighter;
+    color: $darker-grey;
+    .title{
+      max-width: 100%;
+      &.light{
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        color: $dark-grey;
+      }
+      .checkBoxSpace{
+        width: 30px;
+        margin-left: 10px;
+      }
+      .number{
+        margin-left: 20px;
+        &.light{
+          font-family: DIN-NEXT-MEDIUM, sans-serif;
+        }
+      }
+    }
+    .langs{
+      &.light{
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        margin-left: 180px;
+      }
+    }
+    .date{
+      margin-left: 75px;
+      &.light{
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+      }
+      &.val{
+        margin-left: 60px
+      }
+    }
+    @media screen and (max-width: 991px) {
+      font-size: 14px;
+      margin: 0;
+      .langs{
+        &.light{
+          margin-right: 65px;
+          margin-left: 100px;
+        }
+      }
+    }
+    @media screen and (max-width: 768px){
+      font-size: 12px;
+      margin: 0;
+      .langs{
+        display: none;
+      }
+    }
+    @media screen and (max-width: 576px){
+      .date{
+        margin-left: 20px;
+        &.light{
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+.viewTextsEdit{
+  form{
+    .buttons{
+      .DeleteAdd{
+        font-family: 'DIN-NEXT-MEDIUM', sans-serif;
+        margin: 0;
+        button{
+          border: none;
+          padding: 11px 25px;
+          width: 150px;
+          @media screen and (max-width: 768px){
+            width: 100px;
+            padding: 7px 15px;
+          }
+          @media screen and (max-width: 576px) {
+            width: 70px;
+            font-size: 14px;
+            padding: 5px 15px;
+          }
+        }
+        .cancel {
+          background-color: $danger !important;
+        }
+        .update{
+          background-color: $success !important;
+          margin: 0 5px 0 0;
+        }
+        @media screen and (max-width: 768px){
+          height: 50px;
+          font-size: 14px;
+          margin-right: 15px;
+        }
+      }
+      .DeleteAdd.subMenu{
+        margin: 0;
+        .update.subMenu{
+          margin: 0;
+        }
+      }
+      .apply-btn{
+        img{
+          @media screen and (max-width: 768px){
+            display: none;
+          }
+        }
+        @media screen and (max-width: 768px){
+          font-size: 14px;
+          height: 50px;
+          padding: 0 20px;
+        }
+      }
+    }
+    .row{
+      .address{
+        font-family: DIN-NEXT-BOLD, sans-serif;
+      }
+      .addressInput{
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        color: $dark-grey;
+        &:focus{
+          outline: none !important;
+          box-shadow: none;
+        }
+        &::placeholder{
+          font-family: DIN-NEXT-MEDIUM, sans-serif;
+          color: $light-grey;
+          font-size: 14px;
+        }
+      }
+      .addressInput.subMenu{
+        width: 88%;
+        @media screen and (max-width: 768px){
+          width: 134%;
+        }
+      }
+    }
+    .activeSelect{
+      background-color: $dark-white;
+      border: 1px solid $darker-white;
+      font-family: DIN-NEXT-MEDIUM, sans-serif;
+      color: $dark-grey;
+      font-size: 14px;
+      &:focus{
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    .flat-card.textareaContainer{
+      padding: 0;
+      .titleBar{
+        padding: 10px 25px;
+        .language{
+          font-family: DIN-NEXT-BOLD, sans-serif;
+        }
+        .langDelete{
+          border: none;
+          background: none;
+          padding: 0;
+          cursor: pointer;
+        }
+      }
+      .languageContent{
+        border: none;
+        border-radius: 0 0 7px 7px;
+        background-color: $darker-white;
+        color: $darker-grey;
+        padding: 20px;
+        font-family: DIN-NEXT-MEDIUM,sans-serif;
+        height: 340px;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+    .CodeMirror{
+      width: 100%;
+      border-radius: 0px 0px 5px 5px;
+      background-color: $darker-white;
+    }
+    .CodeMirror-gutters{
+      width: 20px !important;
+      background-color: $darker-white;
+    }
+    .CodeMirror-gutter{
+      width: 20px !important;
+      background-color: $darker-white;
+    }
+    .CodeMirror-gutter-wrapper{
+      left: -33px !important;
+    }
+    .os-theme-dark>.os-scrollbar>.os-scrollbar-track, .os-theme-light>.os-scrollbar>.os-scrollbar-track{
+      background-color: $darker-white;
+    }
+    .os-theme-dark.os-host-transition>.os-scrollbar>.os-scrollbar-track>.os-scrollbar-handle, .os-theme-light.os-host-transition>.os-scrollbar>.os-scrollbar-track>.os-scrollbar-handle{
+      background-color: $dark-blue !important;
+    }
+  }
+}
+.footer{
+  .inner-title{
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .logos{
+    .uploaderContainer{
+      .addImageBtn{
+        border: none;
+        background-color: $dark-white;
+        padding: 15px;
+        border: 1px solid $darker-white;
+        border-radius: 7px;
+        cursor: pointer;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+        img{
+          margin: 0;
+          width: 17px;
+          height: 17px;
+        }
+      }
+      .addImageLink{
+        margin-right: 15px;
+        color: $primary;
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        cursor: pointer;
+      }
+    }
+  }
+  form{
+    .textInput{
+      .textArea{
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        border-radius: 5px;
+        width: 100%;
+        height: 200px;
+        color: $dark-grey;
+        padding: 20px;
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    .socialLinks{
+      input{
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        color: $dark-grey;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+      }
+      .right-address{
+        @media screen and (max-width: 768px){
+          margin-top: 20px;
+        }
+      }
+    }
+    .submitBtns{
+      button{
+        border: none;
+        padding: 11px 25px;
+        width: 150px;
+      }
+      .cancel{
+        background-color: $danger !important;
+      }
+      .confirm{
+        background-color: $success !important;
+      }
+    }
+
+  }
+}
+.seo{
+  .inner-title{
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .logos{
+    .uploaderContainer{
+      .addImageBtn{
+        border: none;
+        background-color: $dark-white;
+        padding: 15px;
+        border: 1px solid $darker-white;
+        border-radius: 7px;
+        cursor: pointer;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+        img{
+          margin: 0;
+          width: 17px;
+          height: 17px;
+        }
+      }
+      .addImageLink{
+        margin-right: 15px;
+        color: $primary;
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        cursor: pointer;
+      }
+    }
+  }
+  form{
+    .textInput{
+      .textArea{
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        border-radius: 5px;
+        width: 100%;
+        height: 200px;
+        color: $dark-grey;
+        padding: 20px;
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    .socialLinks{
+      input{
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        color: $dark-grey;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+    .submitBtns{
+      button{
+        border: none;
+        padding: 11px 25px;
+        width: 150px;
+      }
+      .cancel{
+        background-color: $danger !important;
+      }
+      .confirm{
+        background-color: $success !important;
+      }
+    }
+  }
+}
+
+.codes{
+  .inner-title{
+    font-family: DIN-NEXT-BOLD, sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  form{
+    .socialLinks{
+      input{
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        color: $dark-grey;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+    .addCode{
+      border: none;
+      padding: 11px 25px;
+      width: 150px;
+      background-color: $primary;
+    }
+    .submitBtns{
+      button{
+        border: none;
+        padding: 11px 25px;
+        width: 150px;
+      }
+      .cancel{
+        background-color: $danger !important;
+      }
+      .confirm{
+        background-color: $success !important;
+      }
+    }
+  }
+}
+
+.modal{
+  font-family: DIN-NEXT-BOLD, sans-serif;
+  .modal-content{
+    .modal-body{
+      select{
+        font-family: DIN-NEXT-MEDIUM, sans-serif;
+        font-size: 14px;
+        background-color: $dark-white;
+        border: 1px solid $darker-white;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+    label{
+      font-family: DIN-NEXT-BOLD, sans-serif;
+    }
+    input{
+      background-color: $dark-white;
+      border: 1px solid $darker-white;
+      &:focus{
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    .modal-footer{
+      button{
+        border: none;
+        padding: 11px 25px;
+        width: 150px;
+      }
+      .addLang{
+        background-color: $success;
+        margin-right: 20px;
+      }
+      .cancelLang{
+        background-color: $danger;
+      }
+    }
+  }
+}
+
+.swal2-modal * {
+  direction: ltr;
+}
+.CodeMirror{
+  background-color: $dark-white;
+  border: 1px solid $darker-white;
+  border-radius: 5px;
+}
+.CodeMirror-gutter{
+  width: 20px !important;
+  background-color: $dark-white;
+}
+.CodeMirror-gutter-wrapper{
+  left: -33px !important;
+}
+.os-theme-dark>.os-scrollbar>.os-scrollbar-track, .os-theme-light>.os-scrollbar>.os-scrollbar-track{
+  background-color: $white;
+}
+.os-theme-dark.os-host-transition>.os-scrollbar>.os-scrollbar-track>.os-scrollbar-handle, .os-theme-light.os-host-transition>.os-scrollbar>.os-scrollbar-track>.os-scrollbar-handle{
+  background-color: $dark-blue !important;
+}
+
+
+

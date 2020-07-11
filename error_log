@@ -1,0 +1,53 @@
+[21-Aug-2019 15:32:05 UTC] PHP Warning:  require(/home/asearaldhahab/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/index.php on line 24
+[21-Aug-2019 15:32:05 UTC] PHP Fatal error:  require(): Failed opening required '/home/asearaldhahab/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/asearaldhahab/public_html/index.php on line 24
+[21-Aug-2019 15:51:55 UTC] PHP Warning:  require(/home/asearaldhahab/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/index.php on line 24
+[21-Aug-2019 15:51:55 UTC] PHP Fatal error:  require(): Failed opening required '/home/asearaldhahab/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/asearaldhahab/public_html/index.php on line 24
+[21-Aug-2019 16:16:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php:661
+Stack trace:
+#0 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/bootstrap.php(48): Symfony\Polyfill\Mbstring\Mbstring::mb_strwidth('  [Composer\\Dow...', 'ASCII')
+#1 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Helper/Helper.php(54): mb_strwidth('  [Composer\\Dow...', 'ASCII')
+#2 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Application.php(654): Symfony\Component\Console\Helper\Helper::strlen('  [Composer\\Dow...')
+#3 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Application.php(127): Symfony\Component\Console\Application->renderException(Object(Composer\Downloader\TransportException), Object(Symfony\Component\Console\Output\StreamOutput))
+#4 phar:///opt/cpanel/composer/bin/composer/src/Composer/Console/Application.php(103): Symfony\Component\Console\Applicatio in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[21-Aug-2019 16:16:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php:661
+Stack trace:
+#0 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/bootstrap.php(48): Symfony\Polyfill\Mbstring\Mbstring::mb_strwidth('  [Composer\\Dow...', 'ASCII')
+#1 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Helper/Helper.php(54): mb_strwidth('  [Composer\\Dow...', 'ASCII')
+#2 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Application.php(654): Symfony\Component\Console\Helper\Helper::strlen('  [Composer\\Dow...')
+#3 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Application.php(127): Symfony\Component\Console\Application->renderException(Object(Composer\Downloader\TransportException), Object(Symfony\Component\Console\Output\StreamOutput))
+#4 phar:///opt/cpanel/composer/bin/composer/src/Composer/Console/Application.php(103): Symfony\Component\Console\Applicatio in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[21-Aug-2019 16:18:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv() in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php:661
+Stack trace:
+#0 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/bootstrap.php(48): Symfony\Polyfill\Mbstring\Mbstring::mb_strwidth('  [Composer\\Dow...', 'ASCII')
+#1 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Helper/Helper.php(54): mb_strwidth('  [Composer\\Dow...', 'ASCII')
+#2 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Application.php(654): Symfony\Component\Console\Helper\Helper::strlen('  [Composer\\Dow...')
+#3 phar:///opt/cpanel/composer/bin/composer/vendor/symfony/console/Application.php(127): Symfony\Component\Console\Application->renderException(Object(Composer\Downloader\TransportException), Object(Symfony\Component\Console\Output\StreamOutput))
+#4 phar:///opt/cpanel/composer/bin/composer/src/Composer/Console/Application.php(103): Symfony\Component\Console\Applicatio in phar:///opt/cpanel/composer/bin/composer/vendor/symfony/polyfill-mbstring/Mbstring.php on line 661
+[21-Aug-2019 17:30:35 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 17:42:54 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 17:47:56 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 17:54:17 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 18:33:59 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 18:41:48 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 18:41:54 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 18:46:21 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 20:57:05 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[21-Aug-2019 23:48:04 UTC] PHP Fatal error:  Class 'PDO' not found in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 1262
+[08-Sep-2019 00:15:07 UTC] PHP Warning:  require_once(/home/asearaldhahab/public_html/public_html/index.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:07 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/asearaldhahab/public_html/public_html/index.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:07 UTC] PHP Warning:  require_once(/home/asearaldhahab/public_html/public_html/index.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:07 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/asearaldhahab/public_html/public_html/index.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:09 UTC] PHP Warning:  require_once(/home/asearaldhahab/public_html/public_html/index.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:09 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/asearaldhahab/public_html/public_html/index.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:12 UTC] PHP Warning:  require_once(/home/asearaldhahab/public_html/public_html/index.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:12 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/asearaldhahab/public_html/public_html/index.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:13 UTC] PHP Warning:  require_once(/home/asearaldhahab/public_html/public_html/index.php): failed to open stream: No such file or directory in /home/asearaldhahab/public_html/server.php on line 21
+[08-Sep-2019 00:15:13 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/asearaldhahab/public_html/public_html/index.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/asearaldhahab/public_html/server.php on line 21
+[09-Oct-2019 05:24:05 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:24:09 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:31:13 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:35:41 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:35:43 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:35:45 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:37:53 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
+[09-Oct-2019 05:37:55 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/asearaldhahab/public_html/vendor/laravel/framework/src/Illuminate/Support/Arr.php on line 384
