@@ -107,7 +107,7 @@
                                 @if(session('language')=='ar' )
                                 {{$mycurr['ar_name']}}
                                 @else
-                                {{$mycurr['en_name']}}
+                                    {{$mycurr['value']}}
                                 @endif
                             </option>
                             @endforeach

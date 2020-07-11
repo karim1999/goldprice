@@ -661,7 +661,7 @@ class DataController extends Controller
 
 
     public function get_content(){
-        $temp = (array)json_decode(file_get_contents('https://dash.devlab.ae/api/v1/site/'."https://goldpricenow.io"));
+        $temp = (array)json_decode(file_get_contents('https://dash.devlab.ae/api/v1/site/' . env('APP_URL')));
         return $temp;
     }
 
