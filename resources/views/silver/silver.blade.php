@@ -233,7 +233,8 @@
     <div class="col-12 px-0">
         <div class="container result-class response-ajax val">
             <div class="ajax-result-6 val row">
-                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px;">
+                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px; cursor: pointer"
+                     onclick="get_chart_api('e999')">
                     <div style="" class="text-center">
                         <span>
                             @if(session('site_type')=='gold'&&session('language')=='ar')
@@ -250,7 +251,8 @@
                         <span class="current_currency"></span>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px;">
+                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px; cursor: pointer"
+                     onclick="get_chart_api('e958')">
                     <div class="text-center">
                         <span>
                             @if(session('site_type')=='gold'&&session('language')=='ar')
@@ -267,7 +269,8 @@
                         <span class="current_currency"></span>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px;">
+                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px; cursor: pointer"
+                     onclick="get_chart_api('e925')">
                     <div class="text-center">
                         <span>
                             @if(session('site_type')=='gold'&&session('language')=='ar')
@@ -285,7 +288,8 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px;">
+                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px; cursor: pointer"
+                     onclick="get_chart_api('e90')">
                     <div class="text-center">
                         <span>
                             @if(session('site_type')=='gold'&&session('language')=='ar')
@@ -302,7 +306,8 @@
                         <span class="current_currency"></span>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px;">
+                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px; cursor: pointer"
+                     onclick="get_chart_api('e80')">
                     <div class="text-center">
                         <span>
                             @if(session('site_type')=='gold'&&session('language')=='ar')
@@ -319,7 +324,8 @@
                         <span class="current_currency"></span>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px;">
+                <div class="col-12 col-md-6 col-lg-2" style="margin-top: 20px; cursor: pointer"
+                     onclick="get_chart_api('auk')">
                     <div class="text-center">
                         <span>
                             @if(session('site_type')=='gold'&&session('language')=='ar')
@@ -615,7 +621,7 @@
     }
     update_currency_text();
 
-    function get_chart_api() {
+    function get_chart_api(type) {
         $('.select-day').removeClass('active');
         $('.select-day').last().addClass('active');
         $('.mychart').empty();
@@ -625,7 +631,9 @@
         $.ajax({
             method: "get",
             url: "/get_chart_api",
-            data: {}
+            data: {
+                type
+            }
         }).done(function(msg) {
             setTimeout(function() {
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -696,7 +704,8 @@
             $('.loading-image-pricing').remove();
         });
     }
-    get_chart_api();
+
+    get_chart_api("auk");
 
     </script>
 

@@ -25,13 +25,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/', 'DataController@index')->name('index');
+Route::get('/currency/{value}', 'DataController@currency_index');
 Route::get('/getdata', 'DataController@storeDataFromAPI');
 
 Route::get('/update_mode', 'DataController@update_dark_mode_session');
 Route::get('/update_currency', 'DataController@update_currency_session');
 Route::get('/update_country', 'DataController@update_country_session');
 
- 
+
 Route::get('/getDataAjax', 'DataController@getDataAjax');
 Route::get('/update_data_date', 'DataController@update_data_date');
 Route::get('/get_chart_api', 'DataController@get_chart_api');
@@ -100,10 +101,10 @@ Route::get('/test','DataController@daily_currency_price_store'*/ /*function(){
 
 	$analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 
- 
+
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
 
- 
+
 $analyticsData = Analytics::performQuery(
     Period::years(1),
     'ga:sessions',
@@ -113,7 +114,7 @@ $analyticsData = Analytics::performQuery(
     ]
 );
 
- 
+
 return var_dump($analyticsData);
 }
 
@@ -150,22 +151,22 @@ Route::prefix('admin')->group(function () {
 
  	Route::get('/customOptions',function(){return view('admin.customOptions');});
  	Route::get('/index',function(){return view('admin.index');});*/
- 
-/*	Route::get('/contentPages',function(){return view('admin.contentPages');});
-	
-	Route::get('/contentPagesEdit',function(){return view('admin.contentPagesEdit');});
 
-	Route::get('/header',function(){return view('admin.header');});
-	
-	Route::get('/login',function(){return view('admin.login');});
-	Route::get('/opningLetter',function(){return view('admin.opningLetter');});
-	
-	 
-	Route::get('/stylesOptions',function(){return view('admin.stylesOptions');});
-	Route::get('/viewTexts',function(){return view('admin.viewTexts');});
-	Route::get('/viewTextsEdit',function(){return view('admin.viewTextsEdit');});
-	 
-*/
+    /*	Route::get('/contentPages',function(){return view('admin.contentPages');});
+
+        Route::get('/contentPagesEdit',function(){return view('admin.contentPagesEdit');});
+
+        Route::get('/header',function(){return view('admin.header');});
+
+        Route::get('/login',function(){return view('admin.login');});
+        Route::get('/opningLetter',function(){return view('admin.opningLetter');});
+
+
+        Route::get('/stylesOptions',function(){return view('admin.stylesOptions');});
+        Route::get('/viewTexts',function(){return view('admin.viewTexts');});
+        Route::get('/viewTextsEdit',function(){return view('admin.viewTextsEdit');});
+
+    */
 });
 
 

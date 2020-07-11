@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Ixudra\Curl\Facades\Curl;
@@ -14,6 +15,7 @@ class DataController extends Controller
 
 
     public $api;
+
     public function __construct(){
         $this->api=$this->get_content();
         $this->set_init_sessions();
@@ -68,10 +70,15 @@ class DataController extends Controller
        session('language')=session('language');  */
 
 
+    public function currency_index($currency_name)
+    {
+        $currency = Currency::where("value", $currency_name)->orWhere("ar_name", $currency_name)->orWhere("en_name", $currency_name)->first();
+        session(['currency' => $currency->value]);
+        return $this->index(new Request());
+    }
 
     public function index(Request $request)
     {
-
 
 
         $api=$this->api;
@@ -131,30 +138,19 @@ class DataController extends Controller
     }
 
 
-
-
-
-
-
-
     public function update_data_date(Request $request)
     {
         return $this->getDataAjax($request->day);
     }
 
 
-
-
-
-
-
     public function update_currency_session(Request $request){
-        if(session([ 'currency' => $request->currency ]) )
-        {
+        if(session([ 'currency' => $request->currency ]) ) {
             return 'done';
         }
         return 'failed';
     }
+
     public function update_country_session(Request $request){
 
         session([ 'country' => $request->country] );
@@ -169,66 +165,72 @@ class DataController extends Controller
     }
 
 
-
-
     public function getFooter()
     {
         $footer=\App\Footer::get()->first();
         return $footer;
     }
+
     public function getFooterImages(){
         $footer_images=\App\FooterImgs::get();
         return $footer_images;
     }
 
 
-
-
-
-
-
-    public function get_chart_api(){
+    public function get_chart_api(Request $request)
+    {
+        $type = "auk";
+        if ($request->get('type')) {
+            $type = $request->get('type');
+        }
         $days=$this->getDays(session('language'));
         $conv = $this->convertCurrency();
         $datax=array();
-        for($i=0;$i<count($days);$i++)
-        {
+        $arrayName = array();
+
+        if (session('site_type') == 'silver')
+            $arrayName = array(
+                'auk' => $conv,
+                'e999' => (1 / 31.1) * $conv,
+                'e958' => ((1 / 31.1) * 0.948148148) * $conv,
+                'e925' => ((1 / 31.1) * 0.924257932) * $conv,
+                'e90' => ((1 / 31.1) * 0.900716479) * $conv,
+                'e80' => ((1 / 31.1) * 0.798362334) * $conv,
+            );
+        else
+            $arrayName = array(
+                'auk' => (1) * $conv,
+                'e999' => (1 / 31.1) * $conv,
+                'e958' => ((1 / 31.1) * 0.916677674) * $conv,
+                'e925' => ((1 / 31.1) * 0.875016511) * $conv,
+                'e90' => ((1 / 31.1) * 0.750006604) * $conv,
+                'e80' => ((1 / 31.1) * 0.583335535) * $conv,
+            );
+
+        for($i=0; $i<count($days); $i++) {
             $temp=\App\Price::where('date',$days[$i][0].' 00:00:00')->where('country',session('country'))->where('type',session('site_type'))->get('price')->first();
+            if (isset($temp['price'])) {
+                $pricex = $temp['price'] * $arrayName[$type];
+            }
             if(isset($temp['price']))
-                $pricex=$temp['price'];
-            if(isset($temp['price']))
-                array_push($datax, array(  $days[$i][0]=>$pricex/31.1*$conv ));
+                array_push($datax, array($days[$i][0] => $pricex));
             else
                 array_push($datax, array(  $days[$i][0]=>0 ));
 
         }
+
         return  $datax;
 
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     public function storeDataFromAPI(Request $request){
-
-
 
 
         $currencies=\App\Currency::get();
 
 
-        for($i=0;$i<count($currencies);$i++)
-        {
+        for($i=0; $i<count($currencies); $i++) {
             $x=new \App\Country;
             $x->ar_name=$currencies[$i]->ar_name;
             $x->en_name=$currencies[$i]->en_name;
@@ -244,8 +246,6 @@ class DataController extends Controller
         return 0;
 
 
-
-
         /*    $response = Unirest\Request::post("https://sa-translate.p.rapidapi.com/translate/text",
               array(
                 "X-RapidAPI-Host" => "sa-translate.p.rapidapi.com",
@@ -259,22 +259,13 @@ class DataController extends Controller
         */
 
 
-
-
-
-
-
-
-
-
-
     }
-
 
 
     public function test(){
         return sesstion('currency');
     }
+
     public function translate()
     {
 
@@ -284,9 +275,7 @@ class DataController extends Controller
         $currencies=json_decode( file_get_contents('https://openexchangerates.org/api/currencies.json') );
 
 
-
-
-        for($i=session('tempo');$i<count((array)$currencies);$i++){
+        for($i=session('tempo'); $i<count((array)$currencies); $i++){
 
             session([ 'tempo' => $i ]);
 
@@ -304,45 +293,13 @@ class DataController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //finished functions
     public function update_dark_mode_session(Request $request){
 
-        if($request->mode=='night')
-        {
+        if($request->mode=='night') {
             session([ 'mode' => 'night' ]);
             return 'done';
-        }
-        else
-        {
+        } else {
             session([ 'mode' => 'day' ]);
             return 'done';
         }
@@ -353,12 +310,9 @@ class DataController extends Controller
     public function getCurrenciesAPI($cust_day=null){
 
         $day;
-        if($cust_day==null)
-        {
+        if($cust_day==null) {
             $day=date("Y-m-d",abs(strtotime("today"))).' 00:00:00';
-        }
-        else
-        {
+        } else {
             $day= $cust_day;
         }
 
@@ -374,9 +328,11 @@ class DataController extends Controller
 
         return \App\Currency::get();
     }
+
     public function getStoredCountries(){
         return \App\Country::get();
     }
+
     public function getDataAjax($day=null){
 
         $data=$this->getCurrenciesAPI($day);
@@ -384,8 +340,7 @@ class DataController extends Controller
 
 
         $arrayName;
-        if(session('site_type')=='silver')
-        {
+        if(session('site_type')=='silver') {
             if(!isset($data['price']))$data['price']=0;
 
             $arrayName=  array(
@@ -396,9 +351,7 @@ class DataController extends Controller
                 'e90'  =>   (($data['price']/31.1)*0.900716479)*$conv,
                 'e80'  =>   (($data['price']/31.1)*0.798362334)*$conv,
             );
-        }
-        else
-        {
+        } else {
 
             if(!isset($data['price']))$data['price']=0;
             $arrayName=  array(
@@ -412,11 +365,10 @@ class DataController extends Controller
         }
 
 
-
         return $arrayName;
     }
-    public function convertCurrency(){
 
+    public function convertCurrency(){
 
 
         $current_currency= session('currency');
@@ -424,7 +376,6 @@ class DataController extends Controller
 
         // $peter=\App\Currency_price::get();
         //return $peter;
-
 
 
         $currency_db=\App\Currency_price::where('currency',$current_currency)->get()->first();
@@ -442,6 +393,7 @@ class DataController extends Controller
                 $usdCurrency= $convert_from_usd_to_currency['rates'][$temp2]['rate'];
                 return $usdCurrency/$usdCountry;*/
     }
+
     /*  public function setPricesCountries($data){
             session([
               'auk' =>$data['price'],
@@ -455,8 +407,7 @@ class DataController extends Controller
       }*/
 
     public function getDays($language='ar'){
-        if($language=='ar')
-        {
+        if($language=='ar') {
             $days = array(
                 '0'=>array(),
                 '1'=>array(),
@@ -468,8 +419,7 @@ class DataController extends Controller
             );
             $today=date("Ymd",abs(strtotime("today")));
 
-            for($i=6; $i>=0; $i--)
-            {
+            for($i=6; $i>=0; $i--) {
                 $d = date("Y-m-d", strtotime( $today." - $i day") );
                 $days[$i][0]=$d;
                 $arabicday=\DateTime::createFromFormat('Y-m-d', $days[$i][0])->format('D');
@@ -484,9 +434,7 @@ class DataController extends Controller
 
             }
             return array_reverse($days);
-        }
-        else
-        {
+        } else {
             $days = array(
                 '0'=>array(),
                 '1'=>array(),
@@ -498,8 +446,7 @@ class DataController extends Controller
             );
             $today=date("Ymd",abs(strtotime("today")));
 
-            for($i=6; $i>=0; $i--)
-            {
+            for($i=6; $i>=0; $i--) {
                 $d = date("Y-m-d", strtotime( $today." - $i day") );
                 $days[$i][0]=$d;
                 $days[$i][1]=\DateTime::createFromFormat('Y-m-d', $days[$i][0])->format('D');
@@ -509,9 +456,6 @@ class DataController extends Controller
             return array_reverse($days);
         }
     }
-
-
-
 
 
     public function sore_countries(){
@@ -560,41 +504,25 @@ class DataController extends Controller
 
     public function getStoredNews()
     {
-        return \App\News::orderBy('id','DESC')->get();
+        $news = \App\News::orderBy('id', 'DESC');
+        $title = "gold";
+        if (session('site_type') == 'silver') {
+            if (session('language') == "ar") {
+                $title = "فضة";
+            } else {
+                $title = "silver";
+            }
+        } else {
+            if (session('language') == "ar") {
+                $title = "ذهب";
+            }
+        }
+        $news->where('tittle', 'like', '%' . $title . '%');
+        return $news->get();
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // daily
-
 
 
     public function daily(){
@@ -611,12 +539,10 @@ class DataController extends Controller
 
         \App\Price::where('date',date("Y-m-d",abs(strtotime("today"))).' 00:00:00')->delete();
         $countries=\App\Country::get();
-        for($i=0;$i<count($countries);$i++)
-        {
+        for($i=0; $i<count($countries); $i++) {
 //            $temp=(array)json_decode( file_get_contents('https://data-asg.goldprice.org/dbXRates/'.$countries[$i]->value) );
             $temp=(array)Curl::to('https://data-asg.goldprice.org/dbXRates/'.$countries[$i]->value)->asJson()->get();;
-            if(isset($temp['items'][0]->xagPrice))
-            {
+            if(isset($temp['items'][0]->xagPrice)) {
                 $price=new \App\Price;
                 $price->date=date("Y-m-d",abs(strtotime("today"))).' 00:00:00';
                 $price->type='silver';
@@ -631,12 +557,10 @@ class DataController extends Controller
         }
 
 
-        for($i=0;$i<count($countries);$i++)
-        {
+        for($i=0; $i<count($countries); $i++) {
 //            $temp=(array)json_decode( file_get_contents('https://data-asg.goldprice.org/dbXRates/'.$countries[$i]->value) );
             $temp=(array)Curl::to('https://data-asg.goldprice.org/dbXRates/'.$countries[$i]->value)->asJson()->get();;
-            if(isset($temp['items'][0]->xauPrice))
-            {
+            if(isset($temp['items'][0]->xauPrice)) {
                 $price=new \App\Price;
                 $price->date=date("Y-m-d",abs(strtotime("today"))).' 00:00:00';
                 $price->type='gold';
@@ -663,7 +587,7 @@ class DataController extends Controller
         $usd=(array)Curl::to('https://data-asg.goldprice.org/dbXRates/USD')->asJson()->get();
         foreach($currs as $curr){
             //sleep(.01);
-            Log::debug($curr->value);
+//            Log::debug($curr->value);
 
 //            $temp=(array)json_decode( file_get_contents('https://data-asg.goldprice.org/dbXRates/'.$curr->value) );
             $temp = (array)Curl::to('https://data-asg.goldprice.org/dbXRates/'.$curr->value)->asJson()->get();
@@ -671,8 +595,7 @@ class DataController extends Controller
             //return $usd;
             //$temp['items'][0]->xagPrice;
             //return dd(isset($temp['items'][0]->xauPrice));
-            if(isset($temp['items'][0]->xauPrice) )
-            {
+            if(isset($temp['items'][0]->xauPrice) ) {
 
                 $currency_prices=new \App\Currency_price;
                 $currency_prices->currency=$curr->value;
@@ -681,9 +604,7 @@ class DataController extends Controller
                 $currency_prices->save();
 
 
-
             }
-
 
 
             /* $convert_from_usd=json_decode (file_get_contents('https://www.freeforexapi.com/api/live?pairs=USD'.$curr[$i]->value) ,true);
@@ -699,7 +620,6 @@ class DataController extends Controller
               }*/
 
 
-
         }
         return 1;
         // return 0;
@@ -710,22 +630,26 @@ class DataController extends Controller
 
         \App\News::where('id','<>','')->delete();
         $aspiKey='12360df6e53648ed901bc9af0b4254ac';
-        $array=array('sa','eg','ae');
-        for($i=0;$i<count($array);$i++)
-        {
+        $array = array('ar', 'en');
+        $keywords = array('gold', 'silver', 'ذهب', 'فضة');
+        for($i=0; $i<count($array); $i++) {
+            for ($j = 0; $j < count($keywords); $j++) {
 //            $news_api= json_decode (file_get_contents('https://newsapi.org/v2/top-headlines?country='.$array[$i].'&category=business&apiKey='.$aspiKey) ,true);
-            $news_api= Curl::to('https://newsapi.org/v2/top-headlines?country='.$array[$i].'&category=business&apiKey='.$aspiKey)->asJson(true)->get();
-            for($x=0;$x<count($news_api['articles']);$x++)
-            {
+                $news_api = Curl::to('https://newsapi.org/v2/everything?language=' . $array[$i] . '&sortBy=popularity&apiKey=' . $aspiKey . '&qInTitle=' . $keywords[$j])->asJson(true)->get();
+                for ($x = 0; $x < count($news_api['articles']); $x++) {
 
-                $news=new \App\News;
-                $news->tittle=$news_api['articles'][$x]['title'];
-                $news->country=$array[$i];
-                $news->source=$news_api['articles'][$x]['author'];
-                $news->link=$news_api['articles'][$x]['url'];
-                $news->save();
+                    $news = new \App\News;
+                    $news->tittle = $news_api['articles'][$x]['title'];
+                    $news->country = $array[$i];
+                    $news->source = $news_api['articles'][$x]['author'];
+                    $news->link = $news_api['articles'][$x]['url'];
+                    $news->save();
 //                print_r($news);
+                }
+
             }
+
+
         }
 
         return 0;
@@ -733,26 +657,7 @@ class DataController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //
-
-
-
 
 
     public function get_content(){
@@ -761,7 +666,6 @@ class DataController extends Controller
     }
 
     public function set_init_sessions(){
-
 
 
         if(null === (session('language'))){
@@ -787,17 +691,17 @@ class DataController extends Controller
         }  */
 
 
-
-
     }
 
 
     public function turn_off_popup(){
         session(['popup_status'=>'false']);
     }
+
     public function turn_off_header(){
         session(['header_status'=>'false']);
     }
+
     public function switch_language(){
         if(null === (session('language'))){
             session(['language'=>'ar']);
@@ -811,10 +715,6 @@ class DataController extends Controller
 
         return redirect()->route('index');
     }
-
-
-
-
 
 
 }
