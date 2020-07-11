@@ -380,10 +380,10 @@ class DataController extends Controller
 
         $currency_db=\App\Currency_price::where('currency',$current_currency)->get()->first();
         $country_db=\App\Currency_price::where('currency',$current_country)->get()->first();
-        if($country_db)
+//        if($country_db)
             return ($country_db['price']!=0)?($currency_db['price']/$country_db['price']):0;
-        else
-            return 0;
+//        else
+//            return 0;
         /*
                 $convert_from_usd_to_country=json_decode (file_get_contents('https://www.freeforexapi.com/api/live?pairs=USD'.session('country')) ,true);
                 $convert_from_usd_to_currency=json_decode (file_get_contents('https://www.freeforexapi.com/api/live?pairs=USD'.session('currency')),true );
