@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Currency;
+use App\Currency_price;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Ixudra\Curl\Facades\Curl;
@@ -527,15 +528,53 @@ class DataController extends Controller
 
     public function daily(){
         set_time_limit(0);
-        $this->daily_currency_price_store();
-        $this->daily_price_store();
-        $this->daily_news_store();
+        $METALS_API_KEY = env('METALS_API_KEY');
+        if (!$METALS_API_KEY) {
+            echo "Api key does not exist";
+            $METALS_API_KEY = '4cwaux1mbzjssdkc35vvb4b29r7y8qgjn0vt95kz7da10bdai6j4lx4jiy3v';
+        }
+        $data = (array)Curl::to('https://metals-api.com/api/latest?base=USD&access_key=' . $METALS_API_KEY)->asJson(true)->get();
+        if ($data['success']) {
+            Currency_price::where('id', '<>', '')->delete();
+            $rates = $data["rates"];
+            $gold_rate = $rates['XAU'];
+            $silver_rate = $rates['XAG'];
+            foreach ($rates as $currency => $price) {
+                $currency_prices = new Currency_price;
+                $currency_prices->currency = $currency;
+                $currency_prices->price = $price;
+                $currency_prices->date = date("Y-m-d", abs(strtotime("today"))) . ' 00:00:00';
+                $currency_prices->save();
+            }
+            \App\Price::where('date', date("Y-m-d", abs(strtotime("today"))) . ' 00:00:00')->delete();
+            $countries = \App\Country::get();
+            foreach ($countries as $country) {
+                if (array_key_exists($country->value, $rates)) {
+                    $gold_price = new \App\Price;
+                    $gold_price->date = date("Y-m-d", abs(strtotime("today"))) . ' 00:00:00';
+                    $gold_price->type = 'gold';
+                    $gold_price->price = $rates[$country->value] / $gold_rate;
+                    $gold_price->country = $country->value;
+                    $gold_price->save();
+
+                    $silver_price = new \App\Price;
+                    $silver_price->date = date("Y-m-d", abs(strtotime("today"))) . ' 00:00:00';
+                    $silver_price->type = 'silver';
+                    $silver_price->price = $rates[$country->value] / $silver_rate;
+                    $silver_price->country = $country->value;
+                    $silver_price->save();
+                }
+
+            }
+        }
+//        $this->daily_currency_price_store();
+//        $this->daily_price_store();
+//        $this->daily_news_store();
         echo "done";
     }
 
 
     public function daily_price_store(){
-
 
         \App\Price::where('date',date("Y-m-d",abs(strtotime("today"))).' 00:00:00')->delete();
         $countries=\App\Country::get();
@@ -661,7 +700,11 @@ class DataController extends Controller
 
 
     public function get_content(){
-        $temp = (array)json_decode(file_get_contents('https://dash.devlab.ae/api/v1/site/' . env('APP_URL')));
+        $url = "https://asearaldhahab.com";
+        if (env('APP_ENV') != "local") {
+            $url = env('APP_URL');
+        }
+        $temp = (array)json_decode(file_get_contents('https://dash.devlab.ae/api/v1/site/' . $url));
         return $temp;
     }
 

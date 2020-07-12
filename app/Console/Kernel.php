@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $data= new DataController();
             $data->daily();
+            $data->daily_news_store();
         })->daily();
     }
 
