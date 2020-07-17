@@ -622,8 +622,8 @@
     update_currency_text();
 
     function get_chart_api(type) {
-        $('.select-day').removeClass('active');
-        $('.select-day').last().addClass('active');
+        // $('.select-day').removeClass('active');
+        // $('.select-day').last().addClass('active');
         $('.mychart').empty();
         $('.mychart').append('<canvas id="myChart"  height="250" class="ajax-result-6  col-12 mychart" style="width:100%!important;min-width:100%!important"></canvas>');
         $('.ajax-result-6.mychart').css('opacity', '0.05');

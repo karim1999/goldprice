@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
             $data= new DataController();
             $data->daily();
             $data->daily_news_store();
-        })->daily();
+        })->cron("0 */6 * * *");
     }
 
     /**
