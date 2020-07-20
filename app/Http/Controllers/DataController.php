@@ -73,7 +73,12 @@ class DataController extends Controller
 
     public function currency_index($currency_name)
     {
-        $currency = Currency::where("value", $currency_name)->orWhere("ar_name", $currency_name)->orWhere("en_name", $currency_name)->first();
+        $currency = Currency::where("value", $currency_name)
+            ->orWhere("ar_name", $currency_name)
+            ->orWhere("en_name", $currency_name)
+            ->orWhere("ar_name", str_replace("-", " ", $currency_name))
+            ->orWhere("en_name", str_replace("-", " ", $currency_name))
+            ->first();
         session(['currency' => $currency->value]);
         return $this->index(new Request());
     }
