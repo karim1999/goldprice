@@ -25,6 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/', 'DataController@index')->name('index');
+Route::get('/policy', 'DataController@policy')->name('index');
+Route::get('/country/{value}', 'DataController@currency_index');
 Route::get('/currency/{value}', 'DataController@currency_index');
 Route::get('/getdata', 'DataController@storeDataFromAPI');
 

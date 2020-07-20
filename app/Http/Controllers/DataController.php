@@ -77,8 +77,15 @@ class DataController extends Controller
             ->orWhere("ar_name", $currency_name)
             ->orWhere("en_name", $currency_name)
             ->orWhere("ar_name", str_replace("-", " ", $currency_name))
-            ->orWhere("en_name", str_replace("-", " ", $currency_name))
-            ->first();
+            ->orWhere("en_name", str_replace("-", " ", $currency_name));
+        if (env('DEFAULT_SITE') == 'gold') {
+            $currency = $currency->orWhere("en_name", str_replace("-", " ", str_replace("gold-prices-in-", "", $currency_name)))
+                ->orWhere("value", str_replace("-", " ", str_replace("gold-prices-in-", "", $currency_name)));
+        } else {
+            $currency = $currency->orWhere("en_name", str_replace("-", " ", str_replace("silver-prices-in-", "", $currency_name)))
+                ->orWhere("value", str_replace("-", " ", str_replace("silver-prices-in-", "", $currency_name)));
+        }
+        $currency = $currency->first();
         session(['currency' => $currency->value]);
         return $this->index(new Request());
     }
