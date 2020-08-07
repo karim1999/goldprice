@@ -20,6 +20,20 @@
     <link rel="stylesheet" type="text/css" href="{{env('PUBLIC_PATH')}}/css/switcher.css">
     <link rel="stylesheet" type="text/css" href="{{env('PUBLIC_PATH')}}/css/flag-icon.min.css">
     <link rel="stylesheet" type="text/css" href="{{env('PUBLIC_PATH')}}/css/main.css{{$version}}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174669370-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-174669370-1');
+    </script>
+
 </head>
 
 <body>
